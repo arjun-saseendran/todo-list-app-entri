@@ -24,16 +24,23 @@ app.post("/", (request, response) => {
 });
 
 app.put("/:id", (request, response) => {
-  const {paramsId} = parseInt(request.params)
-  const {title} = request.body
-  const targetTodo = todos.find(todo => todo.id === paramsId )
-  if(targetTodo){
-    targetTodo.title = title
-    response.status(202).send(targetTodo)
-  }else{
-    response.status(404).send('Item not found')
+  const { urlId } = parseInt(request.params);
+  const { title } = request.body;
+  const targetTodo = todos.find((todo) => todo.id === urlId);
+  if (targetTodo) {
+    targetTodo.title = title;
+    response.status(202).send(targetTodo);
+  } else {
+    response.status(404).send("Item not found");
   }
+});
 
-})
+app.delete("/:id", (request, response) => {
+  const { urlId } = parseInt(request.params);
+  const deleteTodo = todos.findIndex((todo) => todo.id === urlId);
+
+  todos.splice(deleteTodo, 1);
+  response.status(204).send("Item deleted");
+});
 
 app.listen(port, () => console.log("Server running on port ", port));
