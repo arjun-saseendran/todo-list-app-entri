@@ -1,0 +1,11 @@
+{
+  "name": "todo-list-app-entri",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "arjunsaseendran",
+  "license": "ISC",
+  "description": "server side development entri"
+}
