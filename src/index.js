@@ -1,24 +1,26 @@
-import express from 'express'
-import dotenv from 'dotenv'
+import express from "express";
+import dotenv from "dotenv";
 
-const app = express()
-dotenv.config({path: './.env'})
-const port = process.env.PORT || 3000
+const app = express();
+dotenv.config({ path: "./.env" });
+const port = process.env.PORT || 3000;
 
-app.use(express.json())
+app.use(express.json());
 
-const todos = []
+const todos = [];
+let id = 1;
 
-app.get('/',(request, response)=>{
+app.get("/", (request, response) => {
+  response.status(200).send(todos);
+});
 
+app.post("/", (request, response) => {
+  const { title } = request.body;
+  const todo = { _id: id++, title };
 
+  todos.push(todo);
 
+  response.status(201).send(todo);
+});
 
-    response.status(200).send(todos)
-
-})
-
-
-
-app.listen(port, ()=> console.log('Server running on port ',port)
-)
+app.listen(port, () => console.log("Server running on port ", port));
