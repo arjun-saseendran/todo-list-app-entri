@@ -23,4 +23,17 @@ app.post("/", (request, response) => {
   response.status(201).send(todo);
 });
 
+app.put("/:id", (request, response) => {
+  const {paramsId} = parseInt(request.params)
+  const {title} = request.body
+  const targetTodo = todos.find(todo => todo.id === paramsId )
+  if(targetTodo){
+    targetTodo.title = title
+    response.status(202).send(targetTodo)
+  }else{
+    response.status(404).send('Item not found')
+  }
+
+})
+
 app.listen(port, () => console.log("Server running on port ", port));
